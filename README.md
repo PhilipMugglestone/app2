@@ -1,2 +1,2 @@
-# app2 - S/4HANA Cloud Extension App
+# app2 - App2
 > Business Application
