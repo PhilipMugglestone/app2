@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "start": "cds-serve",
-    "hybrid": "cds watch --profile hybrid --open",
+    "watch": "cds watch --profile development --open",
     "build": "mbt build --mtar app2",
     "deploy": "cf deploy mta_archives/app2.mtar --retries 1",
     "undeploy": "cf undeploy app2 --delete-services --delete-service-keys --delete-service-brokers"
