@@ -1,0 +1,30 @@
+{
+    "version": "1.1.0",
+    "emname": "app2-em",
+    "namespace": "sap/sha/demo",
+    "options": {
+        "management": true,
+        "messagingrest": true,
+        "messaging": true
+    },
+    "rules": {
+        "topicRules": {
+            "publishFilter": [
+                "${namespace}/*"
+            ],
+            "subscribeFilter": [
+                "sap/S4HANAOD/sha1/*",
+                "${namespace}/*"
+            ]
+        },
+        "queueRules": {
+            "publishFilter": [
+                "${namespace}/*"
+            ],
+            "subscribeFilter": [
+                "sap/S4HANAOD/sha1/*",
+                "${namespace}/*"
+            ]
+        }
+    }
+}

@@ -1,0 +1,144 @@
+{
+  "name": "app2",
+  "version": "0.0.1",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "description": "Business Application",
+  "engines": {
+    "node": "^20"
+  },
+  "dependencies": {
+    "@sap/cds": "latest",
+    "@sap/audit-logging": "latest",
+    "@sap/cds-hana": "latest",
+
+    "@sap-cloud-sdk/http-client": "latest",
+    "@sap-cloud-sdk/resilience": "latest",
+    "@sap/xb-msg-amqp-v100": "latest",
+    "@sap/xsenv": "latest",
+    "@sap/xssec": "latest",
+    "passport": "latest",
+
+    "debug": "latest",
+    "express": "latest"
+  },
+  "devDependencies": {
+    "@sap/cds-dk": "latest",
+    "@cap-js/sqlite": "latest",
+    "@sap/ux-specification": "latest"
+  },
+  "sapux": [
+    "app/fiori"
+  ],
+  "scripts": {
+    "start": "cds-serve",
+    "undeploy": "cf undeploy app2 --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "mbt build --mtar app2",
+    "deploy": "cf deploy mta_archives/app2.mtar --retries 1"
+    },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "auth": {
+        "[production]": {
+          "strategy": "JWT"
+        },
+        "[development]": {
+          "strategy": "mock",
+          "users": {
+            "admin": {
+              "roles": [
+                "Admin",
+                "Viewer"
+              ]
+            },
+            "viewer": {
+              "roles": [
+                "Viewer"
+              ]
+            },
+            "viewer2": {
+              "roles": [
+                "Viewer"
+              ]
+            }
+          }
+        }
+      }
+      ,
+      "db": {
+        "[production]": {
+          "kind": "hana-cloud"
+          ,"model": [
+            "db/data-config",
+            "db/data-test"
+          ]
+        },
+        "[development]": {
+          "kind": "sql"
+          ,"model": [
+            "db/data-config",
+            "db/data-test"
+          ]
+        },
+        "model": [
+          "db",
+          "srv"
+        ]
+      }
+      ,
+      "API_SALES_ORDER_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_SALES_ORDER_SRV",
+        "credentials": {
+          "[production]": {
+            "destination": "app2-API_SALES_ORDER_SRV",
+            "path": "s4hanacloud/sap/opu/odata/sap/API_SALES_ORDER_SRV"
+          },
+          "[development]": {
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_SALES_ORDER_SRV"
+          }
+        }
+      }
+      ,
+      "messaging": {
+        "[production]": {
+          "kind": "enterprise-messaging-shared",
+          "queue": {
+            "name": "sap/sha/demo/app2/queue/default"
+          }
+        },
+        "[development]": {
+          "kind": "local-messaging"
+        }
+      }
+    }
+  }
+}

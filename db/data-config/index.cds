@@ -1,0 +1,1 @@
+namespace app2.db;
