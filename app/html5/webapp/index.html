@@ -15,8 +15,6 @@
     <a href="catalog/Sales">Sales</a><br />
     <a href="catalog/Sales?$apply=filter(amount%20gt%20700)/groupby((region),aggregate($count%20as%20nrCountries))">Top Sales Count</a><br />
     <a href="catalog/topSales(amount=700)">Top Sales</a><br />
-    <a href="catalog/VSales">Sales by Region</a><br />
-    <a href="catalog/SessionInfo">Session Info</a><br />
     <a href="catalog/SalesOrders?$top=10&$filter=TotalNetAmount%20gt%202000&$orderby=SalesOrder%20desc">Sales Orders</a><br />
     <a href="catalog/Sales(9)/CatalogService.largestOrder()">Largest Sales Order</a><br />
     <a href="catalog/SalesOrdersLog">Sales Orders Log</a><br />

@@ -22,12 +22,6 @@ Authorization: Basic admin:
 GET http://localhost:4004/catalog/topSales(amount=700)
 Authorization: Basic admin:
 ###
-GET http://localhost:4004/catalog/VSales
-Authorization: Basic admin:
-###
-GET http://localhost:4004/catalog/SessionInfo
-Authorization: Basic admin:
-###
 GET http://localhost:4004/catalog/SalesOrders?$top=10&$filter=TotalNetAmount%20gt%202000&$orderby=SalesOrder%20desc
 Authorization: Basic admin:
 ###

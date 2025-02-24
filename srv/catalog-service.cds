@@ -1,10 +1,5 @@
 using {app2.db as db} from '../db/data-model';
 
-using {
-  CV_SALES,
-  CV_SESSION_INFO
-} from '../db/data-model';
-
 using {API_SALES_ORDER_SRV} from './external/API_SALES_ORDER_SRV.csn';
 
 service CatalogService @(path: '/catalog') @(requires: 'authenticated-user') {
@@ -24,11 +19,6 @@ service CatalogService @(path: '/catalog') @(requires: 'authenticated-user') {
       @(restrict: [{to: 'Admin'}])
       action   boost()        returns Sales;
     };
-
-  entity VSales @(restrict: [{to: 'Viewer'}])         as select * from CV_SALES;
-
-  @readonly
-  entity SessionInfo @(restrict: [{to: 'Viewer'}])    as select * from CV_SESSION_INFO;
 
   function topSales @(restrict: [{to: 'Viewer'}])(amount : Integer) returns many Sales;
 
