@@ -13,7 +13,7 @@
                 "${namespace}/*"
             ],
             "subscribeFilter": [
-                "sap/S4HANAOD/sha1/*",
+                "sap/S4HANAOD/s4h7/*",
                 "${namespace}/*"
             ]
         },
@@ -22,7 +22,7 @@
                 "${namespace}/*"
             ],
             "subscribeFilter": [
-                "sap/S4HANAOD/sha1/*",
+                "sap/S4HANAOD/s4h7/*",
                 "${namespace}/*"
             ]
         }

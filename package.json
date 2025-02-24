@@ -111,7 +111,7 @@
         "model": "srv/external/API_SALES_ORDER_SRV",
         "credentials": {
           "[production]": {
-            "destination": "s4hc1-api-so",
+            "destination": "s4h7-api-so",
             "path": "sap/opu/odata/sap/API_SALES_ORDER_SRV"
           },
           "[development]": {
