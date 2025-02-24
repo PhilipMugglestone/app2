@@ -24,7 +24,7 @@ module.exports = cds.service.impl(async function () {
         }
     });
 
-    em.on('sap/S4HANAOD/sha1/ce/sap/s4/beh/salesorder/v1/SalesOrder/Changed/v1', async msg => {
+    em.on('sap/S4HANAOD/s4h7/ce/sap/s4/beh/salesorder/v1/SalesOrder/Changed/v1', async msg => {
         debug('Event Mesh: SalesOrder Changed msg:', msg.data);
         try {
             const cql = SELECT.one(SalesOrders).where({ SalesOrder: msg.data.SalesOrder });

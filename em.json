@@ -1,7 +1,7 @@
 {
     "version": "1.1.0",
     "emname": "app2-em",
-    "namespace": "sap/sha/demo",
+    "namespace": "sap/btp/global",
     "options": {
         "management": true,
         "messagingrest": true,
