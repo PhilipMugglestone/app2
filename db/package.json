@@ -1,8 +1,7 @@
 {
     "name": "deploy",
     "dependencies": {
-        "@sap/hdi-deploy": "latest",
-        "@sap/hana-client": "latest"
+        "@sap/hdi-deploy": "latest"
     },
     "engines": {
         "node": "^20"

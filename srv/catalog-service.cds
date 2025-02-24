@@ -1,26 +1,7 @@
 using {app2.db as db} from '../db/data-model';
-
 using {API_SALES_ORDER_SRV} from './external/API_SALES_ORDER_SRV.csn';
 
 service CatalogService @(path: '/catalog') @(requires: 'authenticated-user') {
-  entity Sales @(restrict: [
-    {
-      grant: ['READ'],
-      to   : 'Viewer'
-    },
-    {
-      grant: ['WRITE'],
-      to   : 'Admin'
-    }
-  ])                                                  as select * from db.Sales
-    actions {
-      @(restrict: [{to: 'Viewer'}])
-      function largestOrder() returns String;
-      @(restrict: [{to: 'Admin'}])
-      action   boost()        returns Sales;
-    };
-
-  function topSales @(restrict: [{to: 'Viewer'}])(amount : Integer) returns many Sales;
 
   @readonly
   entity SalesOrders @(restrict: [{to: 'Viewer'}])    as
@@ -49,6 +30,6 @@ service CatalogService @(path: '/catalog') @(requires: 'authenticated-user') {
     scopes : userScopes;
   };
 
-  function userInfo()                                               returns userType;
+  function userInfo() returns userType;
 
 };
