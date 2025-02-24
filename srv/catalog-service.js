@@ -4,16 +4,16 @@ const debug = require('debug')('srv:catalog-service');
 module.exports = cds.service.impl(async function () {
 
     const s4hcso = await cds.connect.to('API_SALES_ORDER_SRV');
-    const em = await cds.connect.to('messaging'); 
-    const db = await cds.connect.to('db'); 
+    const em = await cds.connect.to('messaging');
+    const db = await cds.connect.to('db');
 
     const {
-            Sales
-            ,
-            SalesOrders
-            ,
-            SalesOrdersLog
-          } = this.entities;
+        Sales
+        ,
+        SalesOrders
+        ,
+        SalesOrdersLog
+    } = this.entities;
 
     this.after('READ', Sales, (each) => {
         if (each.amount > 500) {
@@ -23,7 +23,7 @@ module.exports = cds.service.impl(async function () {
             else
                 each.comments += ' ';
             each.comments += 'Exceptional!';
-            debug(each.comments, {"country": each.country, "amount": each.amount});
+            debug(each.comments, { "country": each.country, "amount": each.amount });
         } else if (each.amount < 150) {
             each.criticality = 1;
         } else {
@@ -52,7 +52,7 @@ module.exports = cds.service.impl(async function () {
     em.on('sap/sha/demo/app2/topic/boost', async msg => {
         debug('Event Mesh: Boost:', msg.data);
         try {
-            await db.tx(msg).run (
+            await db.tx(msg).run(
                 UPDATE(Sales).with({ comments: 'Boosted! Mesh!' }).where({ ID: { '=': msg.data.ID } })
             );
         } catch (err) {
@@ -68,7 +68,7 @@ module.exports = cds.service.impl(async function () {
             const res = await tx.send({
                 query: cql
             });
-            await db.tx(msg).run (
+            await db.tx(msg).run(
                 INSERT.into(SalesOrdersLog).entries({ salesOrder: msg.data.SalesOrder, incotermsLocation1: res.IncotermsLocation1 })
             );
         } catch (err) {
@@ -76,9 +76,6 @@ module.exports = cds.service.impl(async function () {
             return {};
         }
     });
-
-
-
 
     this.on('topSales', async (req) => {
         try {
@@ -122,19 +119,6 @@ module.exports = cds.service.impl(async function () {
         }
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     this.on('userInfo', req => {
         let results = {};
         results.user = cds.context.user.id;
@@ -151,6 +135,5 @@ module.exports = cds.service.impl(async function () {
     em.on('sap/sha/demo/app2/topic/user', async msg => {
         debug('Event Mesh: User:', msg.data);
     });
-
 
 });

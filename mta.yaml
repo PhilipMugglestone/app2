@@ -33,7 +33,6 @@ modules:
       - name: app2-uaa
       - name: app2-db
 
-
   # --------------------- SERVER MODULE ------------------------
   - name: app2-srv
   # ------------------------------------------------------------
@@ -58,10 +57,6 @@ modules:
       - name: srv-api
         properties:
           srv-url: ${default-url}
-
-
-
-
 
   # ----------- HTML5 APP REPOSITORY APP HTML5 MODULE ----------
   - name: app2-html5
@@ -200,8 +195,6 @@ resources:
       service: html5-apps-repo
       service-plan: app-host
 
-
-
   # --------------------- EVENT MESH SERVICE -------------------
   - name: app2-em
   # ------------------------------------------------------------
@@ -220,9 +213,3 @@ resources:
       service-plan: hdi-shared
     properties:
       hdi-service-name: ${service-name}
-
-
-
-
-
-

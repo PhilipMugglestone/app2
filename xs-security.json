@@ -5,8 +5,7 @@
         {
             "name": "uaa.user",
             "description": "UAA"
-        }
-        ,
+        },
         {
             "name": "$XSAPPNAME.Viewer",
             "description": "Viewer"
@@ -23,8 +22,7 @@
             "scope-references": [
                 "uaa.user"
             ]
-        }
-        ,
+        },
         {
             "name": "Viewer",
             "description": "Viewer",
@@ -39,8 +37,7 @@
                 "$XSAPPNAME.Admin"
             ]
         }
-    ]
-    ,
+    ],
     "role-collections": [
         {
             "name": "app2_Viewer",
@@ -56,8 +53,7 @@
                 "$XSAPPNAME.Admin"
             ]
         }
-    ]
-    ,
+    ],
     "oauth2-configuration": {
         "token-validity": 3600,
         "redirect-uris": [
