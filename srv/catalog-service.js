@@ -52,7 +52,7 @@ module.exports = cds.service.impl(async function () {
     em.on('sap/sha/demo/app2/topic/boost', async msg => {
         debug('Event Mesh: Boost:', msg.data);
         try {
-            await db.tx(msg).run(
+            await db.run(
                 UPDATE(Sales).with({ comments: 'Boosted! Mesh!' }).where({ ID: { '=': msg.data.ID } })
             );
         } catch (err) {
@@ -61,14 +61,15 @@ module.exports = cds.service.impl(async function () {
     });
 
     em.on('sap/S4HANAOD/sha1/ce/sap/s4/beh/salesorder/v1/SalesOrder/Changed/v1', async msg => {
-        debug('Event Mesh: SalesOrder Changed:', msg.data);
+        debug('Event Mesh: SalesOrder Changed msg:', msg.data);
         try {
             const cql = SELECT.one(SalesOrders).where({ SalesOrder: msg.data.SalesOrder });
             const tx = s4hcso.transaction(msg);
             const res = await tx.send({
                 query: cql
             });
-            await db.tx(msg).run(
+            debug('Event Mesh: SalesOrder Changed res:', res);
+            await db.run(
                 INSERT.into(SalesOrdersLog).entries({ salesOrder: msg.data.SalesOrder, incotermsLocation1: res.IncotermsLocation1 })
             );
         } catch (err) {
