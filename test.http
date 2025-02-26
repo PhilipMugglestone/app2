@@ -7,6 +7,9 @@ Authorization: Basic admin:
 GET http://localhost:4004/catalog/SalesOrders?$top=10&$filter=TotalNetAmount%20gt%202000&$orderby=SalesOrder%20desc
 Authorization: Basic admin:
 ###
+GET http://localhost:4004/catalog/SalesOrders('182')
+Authorization: Basic admin:
+###
 GET http://localhost:4004/catalog/SalesOrdersLog
 Authorization: Basic admin:
 ###
